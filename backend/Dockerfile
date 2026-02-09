@@ -10,7 +10,10 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+
+RUN pip install --upgrade pip setuptools==65.5.1 wheel \
+    && pip install --no-cache-dir -r requirements.txt \
+    && pip install --no-cache-dir --no-build-isolation openai-whisper==20231117
 
 COPY app ./app
 
