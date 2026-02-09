@@ -17,7 +17,6 @@ ffmpeg-python==0.2.0
 opencv-python==4.9.0.80
 
 # --- speech to text ---
-openai-whisper==20231117
 torch>=2.0.0
 
 # --- language analysis ---
@@ -29,3 +28,7 @@ openai==1.12.0
 
 # --- misc ---
 numpy==1.26.3
+
+# --- testing ---
+pytest==8.0.0
+httpx==0.27.0
