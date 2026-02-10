@@ -5,7 +5,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - storage-data:/storage
+      - ./data:/storage
     environment:
       - STORAGE_ROOT=/storage
 
@@ -19,5 +19,3 @@ services:
     depends_on:
       - backend
 
-volumes:
-  storage-data:

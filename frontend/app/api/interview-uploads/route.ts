@@ -4,7 +4,9 @@ import fs from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 
-const DATA_ROOT = path.resolve(process.cwd(), "..", "data");
+const DATA_ROOT = process.env.STORAGE_ROOT
+  ? path.resolve(process.env.STORAGE_ROOT)
+  : path.resolve(process.cwd(), "..", "data");
 
 function sanitizeSegment(input: string): string {
   const cleaned = (input || "")
