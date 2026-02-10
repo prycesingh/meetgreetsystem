@@ -17,8 +17,8 @@ ffmpeg-python==0.2.0
 opencv-python==4.9.0.80
 
 # --- speech to text ---
-openai-whisper==20231117
-torch>=2.0.0
+# NOTE: heavy AI dependencies moved to requirements-ai.txt to keep
+# docker base builds stable and fast.
 
 # --- language analysis ---
 language-tool-python==2.7.1

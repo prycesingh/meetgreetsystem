@@ -1,0 +1,4 @@
+# Optional AI/STT dependencies.
+# Install these only when enabling local transcription/training pipelines.
+openai-whisper==20231117
+torch>=2.0.0

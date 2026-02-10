@@ -9,11 +9,14 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
-# Prod image installs dependencies once and runs without mounting source.
-COPY requirements.txt .
+# Prod image installs API/runtime dependencies once and runs without source mounts.
+COPY requirements.txt requirements-ai.txt ./
+
+ARG INSTALL_AI_DEPS=false
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install --upgrade pip setuptools wheel \
-    && pip install --no-build-isolation --no-cache-dir -r requirements.txt
+    && pip install --no-cache-dir -r requirements.txt \
+    && if [ "$INSTALL_AI_DEPS" = "true" ]; then pip install --no-cache-dir -r requirements-ai.txt; fi
 
 COPY app ./app
 

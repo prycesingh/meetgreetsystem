@@ -3,6 +3,9 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+      args:
+        # Set true to install heavy local AI deps (torch/whisper).
+        INSTALL_AI_DEPS: "false"
     ports:
       - "8000:8000"
     volumes:
