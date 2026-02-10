@@ -2,17 +2,20 @@
 
 import { useEffect } from "react";
 
+import { useRecorder2 } from "../hooks/useRecorder";
+import type { InterviewQuestion } from "../lib/apiTypes";
 import { QuestionCard } from "./QuestionCard";
 import { RecordingControls } from "./RecordingControls";
-import { useRecorder } from "../hooks/useRecorder";
-import type { InterviewQuestion } from "../lib/apiTypes";
 
 interface InterviewRecorderProps {
   interviewId: string;
   questions: InterviewQuestion[];
 }
 
-export function InterviewRecorder({ interviewId, questions }: InterviewRecorderProps) {
+export function InterviewRecorder({
+  interviewId,
+  questions,
+}: InterviewRecorderProps) {
   const {
     activeQuestion,
     isRecording,
@@ -20,7 +23,7 @@ export function InterviewRecorder({ interviewId, questions }: InterviewRecorderP
     startRecording,
     stopRecording,
     setActiveQuestion,
-  } = useRecorder(questions);
+  } = useRecorder2(questions);
 
   useEffect(() => {
     if (questions.length > 0) {

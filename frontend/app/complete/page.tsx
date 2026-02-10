@@ -4,7 +4,9 @@ import { AlertTriangle, CheckCircle, Clock } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-const CompletePage = () => {
+import { Suspense } from "react";
+
+function CompletePageInner() {
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
   const isIncomplete = status === "incomplete";
@@ -163,6 +165,12 @@ const CompletePage = () => {
       </div>
     </div>
   );
-};
+}
 
-export default CompletePage;
+export default function CompletePage() {
+  return (
+    <Suspense>
+      <CompletePageInner />
+    </Suspense>
+  );
+}

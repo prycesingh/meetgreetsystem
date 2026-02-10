@@ -1,5 +1,4 @@
-import { useMemo } from "react";
-
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { InterviewQuestion } from "../lib/apiTypes";
 
 interface RecorderState {
@@ -55,9 +54,6 @@ export function useRecorder2(questions: InterviewQuestion[]): RecorderState {
     setActiveQuestion,
   };
 }
-("use client");
-
-import { useCallback, useEffect, useRef, useState } from "react";
 
 export type RecorderStatus =
   | "idle"

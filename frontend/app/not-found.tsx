@@ -1,13 +1,15 @@
 "use client";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 const NotFound = () => {
+  const pathname = usePathname();
   useEffect(() => {
     console.error(
       "404 Error: User attempted to access non-existent route:",
-      location.pathname,
+      pathname,
     );
-  }, [location.pathname]);
+  }, [pathname]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted">

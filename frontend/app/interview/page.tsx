@@ -25,7 +25,9 @@ const buildInterviewId = () => {
   return `interview-${stamp}`;
 };
 
-const InterviewPage = () => {
+import { Suspense } from "react";
+
+function InterviewPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const recorder = useRecorder();
@@ -583,6 +585,12 @@ const InterviewPage = () => {
       </div>
     </div>
   );
-};
+}
 
-export default InterviewPage;
+export default function InterviewPage() {
+  return (
+    <Suspense>
+      <InterviewPageInner />
+    </Suspense>
+  );
+}
