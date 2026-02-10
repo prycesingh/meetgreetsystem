@@ -11,7 +11,8 @@ RUN apt-get update \
 
 COPY requirements.txt .
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --no-cache-dir -r requirements.txt
+    pip install --upgrade pip setuptools wheel \
+    && pip install --no-build-isolation --no-cache-dir -r requirements.txt
 
 # Dev image expects source to be mounted for hot reload.
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

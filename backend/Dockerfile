@@ -12,7 +12,8 @@ RUN apt-get update \
 # Prod image installs dependencies once and runs without mounting source.
 COPY requirements.txt .
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --no-cache-dir -r requirements.txt
+    pip install --upgrade pip setuptools wheel \
+    && pip install --no-build-isolation --no-cache-dir -r requirements.txt
 
 COPY app ./app
 
