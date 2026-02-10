@@ -4,11 +4,12 @@ from pathlib import Path
 from uuid import uuid4
 
 
-BASE_STORAGE = Path(os.getenv("STORAGE_ROOT", "/storage"))
+DEFAULT_DATA_ROOT = Path.cwd().resolve().parent / "data"
+DATA_ROOT = Path(os.getenv("STORAGE_ROOT", str(DEFAULT_DATA_ROOT)))
 
 
 def ensure_user_storage_path(user_id: str) -> Path:
-    path = BASE_STORAGE / user_id
+    path = DATA_ROOT / user_id
     path.mkdir(parents=True, exist_ok=True)
     return path
 
