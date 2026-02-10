@@ -1,0 +1,35 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    volumes:
+      # Dev: mount source and local data for hot reload.
+      - ./backend:/app
+      - ./data:/data
+    environment:
+      - STORAGE_ROOT=/data
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    volumes:
+      # Dev: mount source and preserve node_modules inside the container.
+      - ./frontend:/app
+      - /app/node_modules
+      - ./data:/data
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - STORAGE_ROOT=/data
+    depends_on:
+      - backend
+
+# Usage:
+# docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
